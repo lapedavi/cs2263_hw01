@@ -1,13 +1,21 @@
-# cs2263_hw01
-#Changelog
-All notable chages to this project will be documented in this file.
+CONTENTS OF THIS FILE
+^^^^^^^^^^^^^^^^^^^^^
 
-The format is based on [Keep a CHangelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+*Introduction
+*Installation
+*Usage
 
-## [Unreleased]
+INTRODUCTION
+^^^^^^^^^^^^
 
-## [0.0.1] - 2021-09-02
-### Added
- - Git repository
- - Changelog file
+The purpose of this project is to complete requirements for CS 2263's Homework 1
+
+INSTALLATION
+^^^^^^^^^^^^
+
+No installation information
+
+USAGE
+^^^^^
+
+No Usage Information
