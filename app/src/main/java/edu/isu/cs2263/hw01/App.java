@@ -3,10 +3,12 @@
  */
 package edu.isu.cs2263.hw01;
 import org.apache.commons.cli.*;
+import java.util.Scanner;
+import java.io.File;
 
 public class App {
     public static void main(String[] args) {
-
+        Scanner sc = new Scanner(System.in);
 
         Options options = new Options();
         options.addOption("h","help",false,"print usage message");
@@ -17,26 +19,104 @@ public class App {
 
         try {
             CommandLine cmd = parser.parse(options, args);
-            if(cmd.hasOption("h")) {
-                help();
-            } else if(cmd.hasOption("b")) {
-                batch(args);
-            } else if(cmd.hasOption("o")) {
-                output(args);
+            if("eval".equals(args[0])) {
+
+                if(args.length > 1 && ("-h".equals(args[1]) || "-b".equals((args[1])) || "-o".equals(args[1]))) {
+                    if (cmd.hasOption("h")) {
+                        help();
+                    } else {
+                        if(cmd.hasOption("b") && cmd.hasOption("o")){
+
+                        } else {
+                            if (cmd.hasOption("b")) {
+                                batch(args);
+                            }
+                            if (cmd.hasOption("o")) {
+                                output(args);
+                            }
+                        }
+                    }
+                } else {
+                    System.out.println("\nEnter \"exit\" to exit the program");
+                    System.out.println("Separate numbers and operators by spaces");
+                    while(true) {
+                        try {
+                            System.out.print("> ");
+                            String evaluateExpression = sc.nextLine();
+                            if ("exit".equals(evaluateExpression)) {
+                                break;
+                            }
+                            String[] stringArray = evaluateExpression.split(" ");
+                            if (stringArray.length > 2) {
+                                evaluate(stringArray);
+                            } else {
+                                throw new Exception("Equations require a minimum of 3 arguments of Number, Operator, then Number");
+                            }
+                        }catch (Exception e){
+                            System.out.println("Exception Occurred: " + e.getMessage());
+                        }
+
+                    }
+                }
+
             }
         }catch (Exception e){
-            System.out.println(e.getMessage());
+            System.out.println("Exception Occurred: " + e.getMessage());
         }
 
     }
 
+    public static void evaluate(String[] expression){
+        try {
+            for (int x = 0; x < expression.length - 1; x = x + 2) {
+                String operation = expression[x + 1];
+                double firstNum = Double.parseDouble(expression[x]);
+                double secondNum = Double.parseDouble(expression[x + 2]);
+                if (operation.equals("*")) {
+                    expression[x + 2] = String.valueOf(firstNum * secondNum);
+                } else if (operation.equals("/")) {
+                    expression[x + 2] = String.valueOf(firstNum / secondNum);
+                } else if (operation.equals("+")) {
+                    expression[x + 2] = String.valueOf(firstNum + secondNum);
+                } else if (operation.equals("-")) {
+                    expression[x + 2] = String.valueOf(firstNum - secondNum);
+                } else {
+                    throw new Exception("Please provide an operator of * , / , + , -");
+                }
+            }
+            System.out.println("  -> " + expression[expression.length - 1]);
+        } catch (Exception e){
+            System.out.println("Exception Occurred: " + e.getMessage());
+        }
+    }
+
     public static void batch(String[] args){
-        String lib = args[1];
-        System.out.println("Batch value: " + lib);
+        String lib = args[2];
+        File batchFile = new File(lib);
+        try {
+            if (batchFile.exists()) {
+                Scanner bsc = new Scanner(batchFile);
+                while(bsc.hasNextLine()){
+                    String line = bsc.nextLine();
+                    String[] stringArray = line.split(" ");
+                    if (stringArray.length > 2) {
+                        System.out.println("> " + line);
+                        evaluate(stringArray);
+                    } else {
+                        throw new Exception("Equations require a minimum of 3 arguments of Number, Operator, then Number");
+                    }
+                }
+                bsc.close();
+            } else {
+                throw new Exception("File was not found, please provide a real file");
+            }
+        } catch (Exception e){
+            System.out.println("Exception Occurred: " + e.getMessage());
+        }
     }
 
     public static void output(String[] args){
-        String lib = args[1];
+        String lib = args[2];
         System.out.println("Output value: " + lib);
     }
 
