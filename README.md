@@ -1,21 +1,24 @@
-CONTENTS OF THIS FILE
-^^^^^^^^^^^^^^^^^^^^^
+#CS2263 Homework 1
+This project evaluates expressions provided by the user through files, and or inputs
 
-*Introduction
-*Installation
-*Usage
+##Table of Contents
+* Installation
+* Usage
+* Contributing
+* Credits
+* License
 
-INTRODUCTION
-^^^^^^^^^^^^
+##Installation
+This project was developed using gradle, and the IDEA IDE
 
-The purpose of this project is to complete requirements for CS 2263's Homework 1
+##Usage
+When you use this project you can run it in the terminal, and with eval -h you will see instructions on how to use the project
 
-INSTALLATION
-^^^^^^^^^^^^
+##Contributing
+This project will not be accepting revisions outside the original developers
 
-No installation information
+##Credits
+Author: David Lape
 
-USAGE
-^^^^^
-
-No Usage Information
+##License
+MIT License
