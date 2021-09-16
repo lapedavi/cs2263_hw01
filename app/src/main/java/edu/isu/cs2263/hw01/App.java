@@ -4,7 +4,7 @@
 package edu.isu.cs2263.hw01;
 import org.apache.commons.cli.*;
 import java.util.Scanner;
-import java.io.File;
+import java.io.*;
 
 public class App {
     public static void main(String[] args) {
@@ -25,15 +25,10 @@ public class App {
                     if (cmd.hasOption("h")) {
                         help();
                     } else {
-                        if(cmd.hasOption("b") && cmd.hasOption("o")){
-
-                        } else {
-                            if (cmd.hasOption("b")) {
-                                batch(args);
-                            }
-                            if (cmd.hasOption("o")) {
-                                output(args);
-                            }
+                        if (cmd.hasOption("b")) {
+                            batch(args);
+                        } else if (cmd.hasOption("o")) {
+                            output(args);
                         }
                     }
                 } else {
@@ -66,7 +61,7 @@ public class App {
 
     }
 
-    public static void evaluate(String[] expression){
+    public static String evaluate(String[] expression){
         try {
             for (int x = 0; x < expression.length - 1; x = x + 2) {
                 String operation = expression[x + 1];
@@ -88,6 +83,7 @@ public class App {
         } catch (Exception e){
             System.out.println("Exception Occurred: " + e.getMessage());
         }
+        return expression[expression.length-1];
     }
 
     public static void batch(String[] args){
@@ -117,6 +113,29 @@ public class App {
 
     public static void output(String[] args){
         String lib = args[2];
+        File outputFile = new File(lib);
+        Scanner sc = new Scanner(System.in);
+        try {
+            outputFile.createNewFile();
+            FileWriter outputWriter = new FileWriter(lib);
+            System.out.println("\nEnter \"exit\" to exit the program");
+            System.out.println("Separate numbers and operators by spaces");
+            while (true) {
+                System.out.print("> ");
+                String evaluateExpression = sc.nextLine();
+                if ("exit".equals(evaluateExpression)) {
+                    break;
+                }
+                outputWriter.append(evaluateExpression + "\n");
+                String[] stringArray = evaluateExpression.split(" ");
+                if (stringArray.length > 2) {
+                    outputWriter.append(" -> "+evaluate(stringArray)+"\n");
+                }
+            }
+            outputWriter.close();
+        }catch (Exception e){
+            System.out.println("Exception Occurred: " + e.getMessage());
+        }
         System.out.println("Output value: " + lib);
     }
 
