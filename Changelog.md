@@ -15,15 +15,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Error in Changelog.md
 
-##[1.1.0] - 2021-09-16
-###Added
-
+## [1.1.0] - 2021-09-16
+### Added
 - Evaluation Feature
-- File Check and read to read expressions from a file
+- File check and read to read expressions from a file
 
-###Changed
-
-- Changed Check for Arguments after eval command was introduced, increasing most arrays by one
+### Changed
+- Changed checks for Arguments after eval command was introduced, increasing most arrays by one
 - Corrected README.md format
 
 ## [1.0.0] - 2021-09-15
