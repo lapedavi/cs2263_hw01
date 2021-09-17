@@ -21,7 +21,7 @@ public class App {
             CommandLine cmd = parser.parse(options, args);
             if("eval".equals(args[0])) {
 
-                if(args.length > 1 && ("-h".equals(args[1]) || "-b".equals((args[1])) || "-o".equals(args[1]))) {
+                if(args.length > 1 && ("-h".equals(args[1]) || "-b".equals((args[1])) || "-o".equals(args[1]) || "--help".equals(args[1]) || "--batch".equals(args[1]) || "--output".equals(args[1])) ) {
                     if (cmd.hasOption("h")) {
                         help();
                     } else {
@@ -136,7 +136,6 @@ public class App {
         }catch (Exception e){
             System.out.println("Exception Occurred: " + e.getMessage());
         }
-        System.out.println("Output value: " + lib);
     }
 
     public static void help(){
