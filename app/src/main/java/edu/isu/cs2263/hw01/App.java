@@ -7,6 +7,10 @@ import org.apache.commons.cli.*;
 import java.util.Scanner;
 import java.io.*;
 
+//David Lape
+//CS2263 Section 01,02
+//Created 2021-09-02
+
 //Class
 public class App {
 
